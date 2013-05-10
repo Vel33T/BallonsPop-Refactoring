@@ -50,6 +50,7 @@
                 return;
             }
         }
+        
         public static void CheckUp(byte[,] matrix, int row, int column, int searchedItem)
         {
             int newRow = row + 1;
@@ -163,7 +164,7 @@
             {
                 Console.WriteLine("{0}.   {1}", i + 1, scores[i]);
             }
-            Console.WriteLine("----------------------------------");
+            Console.WriteLine("-----------------------------------");
 
 
         }
@@ -177,7 +178,7 @@
             {
                 if (chart[i, 0] == null)
                 {
-                    Console.WriteLine("Type in your name.");
+                    Console.WriteLine("Please, insert your name:");
                     string tempUserName = Console.ReadLine();
                     chart[i, 0] = points.ToString();
                     chart[i, 1] = tempUserName;
@@ -198,7 +199,7 @@
             }
             if (points < worstMoves && skilled == false)
             {
-                Console.WriteLine("Type in your name.");
+                Console.WriteLine("Please, insert your name:");
                 string tempUserName = Console.ReadLine();
                 chart[worstMovesChartPosition, 0] = points.ToString();
                 chart[worstMovesChartPosition, 1] = tempUserName;
@@ -226,7 +227,7 @@
                         userRow = int.Parse(temp[0].ToString());
                         if (userRow >= Game.MATRIX_ROWS)
                         {
-                            throw new IndexOutOfRangeException("There are no such field!");
+                            throw new IndexOutOfRangeException("There is no such field!");
                         }
                         userColumn = int.Parse(temp[2].ToString());
 
@@ -237,14 +238,14 @@
                         userMoves++;
                         if (IsFinished(matrix))
                         {
-                            Console.WriteLine("Gratz ! You completed it in {0} moves.", userMoves);
+                            Console.WriteLine("Great! You completed it in {0} moves.", userMoves);
                             if (SignIfSkilled(topFive, userMoves))
                             {
                                 PrintScoreBoard(topFive);
                             }
                             else
                             {
-                                Console.WriteLine("I am sorry you are not skillful enough for TopFive chart!");
+                                Console.WriteLine("I'm sorry, you are not skillful enough for TopFive chart!");
                             }
                             matrix = GenerateMatrix(Game.MATRIX_ROWS, Game.MATRIX_COLS);
                             userMoves = 0;
@@ -254,7 +255,7 @@
                     }
                     else
                     {
-                        throw new IndexOutOfRangeException("There are no such field! Try again!");
+                        throw new IndexOutOfRangeException("There is no such field! Try again!");
                     }
             }
         }
@@ -286,7 +287,7 @@
             }
             while (temp != "EXIT");
 
-            Console.WriteLine("Good Bye! ");
+            Console.WriteLine("Good Bye!");
         }
     }
 }
