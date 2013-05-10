@@ -5,22 +5,19 @@
 
     public class BaloonsPopGame : Game
     {
-        private static void CheckLeft(byte[,] matrix, int row, int column, int searchedItem)
+        private static void CheckField(byte[,] matrix, int row, int column, int searchedItem)
         {
-            int newRow = row;
-            int newColumn = column - 1;
-
             //If index is out of the matrix stops recursion
-            if (newColumn >= Game.MATRIX_COLS || newRow >= Game.MATRIX_ROWS
-                || newColumn < 0 || newRow < 0 )
+            if (column >= Game.MATRIX_COLS || row >= Game.MATRIX_ROWS
+                || column < 0 || row < 0)
             {
                 return;
             }
 
-            if (matrix[newRow, newColumn] == searchedItem)
+            if (matrix[row, column] == searchedItem)
             {
-                matrix[newRow, newColumn] = 0;
-                CheckLeft(matrix, newRow, newColumn, searchedItem);
+                matrix[row, column] = 0;
+                CheckField(matrix, row, column, searchedItem);
             }
             else
             {
@@ -28,74 +25,14 @@
             }
         }
 
-        public static void CheckRight(byte[,] matrix, int row, int column, int searchedItem)
+        private static void CheckNeighboringFields(byte[,] matrix, int row, int column, int searchedItem)
         {
-            int newRow = row;
-            int newColumn = column + 1;
-
-            //If index is out of the matrix stops recursion
-            if (newColumn >= Game.MATRIX_COLS || newRow >= Game.MATRIX_ROWS
-                || newColumn < 0 || newRow < 0)
-            {
-                return;
-            }
-
-            if (matrix[newRow, newColumn] == searchedItem)
-            {
-                matrix[newRow, newColumn] = 0;
-                CheckRight(matrix, newRow, newColumn, searchedItem);
-            }
-            else
-            {
-                return;
-            }
-        }
-        
-        public static void CheckUp(byte[,] matrix, int row, int column, int searchedItem)
-        {
-            int newRow = row + 1;
-            int newColumn = column;
-            
-            //If index is out of the matrix stops recursion
-            if (newColumn >= Game.MATRIX_COLS || newRow >= Game.MATRIX_ROWS
-                || newColumn < 0 || newRow < 0)
-            {
-                return;
-            }
-
-            if (matrix[newRow, newColumn] == searchedItem)
-            {
-                matrix[newRow, newColumn] = 0;
-                CheckUp(matrix, newRow, newColumn, searchedItem);
-            }
-            else
-            {
-                return;
-            }
+            CheckField(matrix, row, column + 1, searchedItem);
+            CheckField(matrix, row, column - 1, searchedItem);
+            CheckField(matrix, row + 1, column, searchedItem);
+            CheckField(matrix, row - 1, column, searchedItem);
         }
 
-        public static void CheckDown(byte[,] matrix, int row, int column, int searchedItem)
-        {
-            int newRow = row - 1;
-            int newColumn = column;
-
-            //If index is out of the matrix stops recursion
-            if (newColumn >= Game.MATRIX_COLS || newRow >= Game.MATRIX_ROWS
-                || newColumn < 0 || newRow < 0)
-            {
-                return;
-            }
-
-            if (matrix[newRow, newColumn] == searchedItem)
-            {
-                matrix[newRow, newColumn] = 0;
-                CheckDown(matrix, newRow, newColumn, searchedItem);
-            }
-            else
-            {
-                return;
-            }
-        }
         public static bool Change(byte[,] matrixToModify, int rowAtm, int columnAtm)
         {
             if (matrixToModify[rowAtm, columnAtm] == 0)
@@ -106,11 +43,7 @@
             byte searchedTarget = matrixToModify[rowAtm, columnAtm];
 
             matrixToModify[rowAtm, columnAtm] = 0;
-            CheckLeft(matrixToModify, rowAtm, columnAtm, searchedTarget);
-            CheckRight(matrixToModify, rowAtm, columnAtm, searchedTarget);
-            CheckUp(matrixToModify, rowAtm, columnAtm, searchedTarget);
-            CheckDown(matrixToModify, rowAtm, columnAtm, searchedTarget);
-
+            CheckNeighboringFields(matrixToModify, rowAtm, columnAtm, searchedTarget);
             return false;
         }
 
@@ -169,6 +102,14 @@
 
         }
 
+        private static void SavePlayerPoints(string[,] chart, int points, int i)
+        {
+            Console.WriteLine("Please, insert your name:");
+            string tempUserName = Console.ReadLine();
+            chart[i, 0] = points.ToString();
+            chart[i, 1] = tempUserName;
+        }
+
         public static bool SignIfSkilled(string[,] chart, int points)
         {
             bool skilled = false;
@@ -178,10 +119,7 @@
             {
                 if (chart[i, 0] == null)
                 {
-                    Console.WriteLine("Please, insert your name:");
-                    string tempUserName = Console.ReadLine();
-                    chart[i, 0] = points.ToString();
-                    chart[i, 1] = tempUserName;
+                    SavePlayerPoints(chart, points, i);
                     skilled = true;
                     break;
                 }
@@ -199,10 +137,7 @@
             }
             if (points < worstMoves && skilled == false)
             {
-                Console.WriteLine("Please, insert your name:");
-                string tempUserName = Console.ReadLine();
-                chart[worstMovesChartPosition, 0] = points.ToString();
-                chart[worstMovesChartPosition, 1] = tempUserName;
+                SavePlayerPoints(chart, points, worstMovesChartPosition);
                 skilled = true;
             }
             return skilled;
