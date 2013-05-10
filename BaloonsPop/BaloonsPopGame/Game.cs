@@ -5,6 +5,10 @@
 
     public class Game
     {
+        //The size of the field
+        public const int MATRIX_ROWS=5;
+        public const int MATRIX_COLS=10;
+
         public static void PrintMatrix(byte[,] matrix)
         {
             StringBuilder output = new StringBuilder();

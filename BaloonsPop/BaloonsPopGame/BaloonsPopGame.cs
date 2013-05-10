@@ -9,64 +9,65 @@
         {
             int newRow = row;
             int newColumn = column - 1;
-            try
-            {
-                if (matrix[newRow, newColumn] == searchedItem)
-                {
-                    matrix[newRow, newColumn] = 0;
-                    CheckLeft(matrix, newRow, newColumn, searchedItem);
-                }
-                else
-                {
-                    return;
-                }
-            }
-            catch (IndexOutOfRangeException)
+
+            //If index is out of the matrix stops recursion
+            if (newColumn >= Game.MATRIX_COLS || newRow >= Game.MATRIX_ROWS
+                || newColumn < 0 || newRow < 0 )
             {
                 return;
             }
 
+            if (matrix[newRow, newColumn] == searchedItem)
+            {
+                matrix[newRow, newColumn] = 0;
+                CheckLeft(matrix, newRow, newColumn, searchedItem);
+            }
+            else
+            {
+                return;
+            }
         }
 
         public static void CheckRight(byte[,] matrix, int row, int column, int searchedItem)
         {
             int newRow = row;
             int newColumn = column + 1;
-            try
-            {
-                if (matrix[newRow, newColumn] == searchedItem)
-                {
-                    matrix[newRow, newColumn] = 0;
-                    CheckRight(matrix, newRow, newColumn, searchedItem);
-                }
-                else
-                {
-                    return;
-                }
-            }
-            catch (IndexOutOfRangeException)
+
+            //If index is out of the matrix stops recursion
+            if (newColumn >= Game.MATRIX_COLS || newRow >= Game.MATRIX_ROWS
+                || newColumn < 0 || newRow < 0)
             {
                 return;
             }
 
+            if (matrix[newRow, newColumn] == searchedItem)
+            {
+                matrix[newRow, newColumn] = 0;
+                CheckRight(matrix, newRow, newColumn, searchedItem);
+            }
+            else
+            {
+                return;
+            }
         }
         public static void CheckUp(byte[,] matrix, int row, int column, int searchedItem)
         {
             int newRow = row + 1;
             int newColumn = column;
-            try
+            
+            //If index is out of the matrix stops recursion
+            if (newColumn >= Game.MATRIX_COLS || newRow >= Game.MATRIX_ROWS
+                || newColumn < 0 || newRow < 0)
             {
-                if (matrix[newRow, newColumn] == searchedItem)
-                {
-                    matrix[newRow, newColumn] = 0;
-                    CheckUp(matrix, newRow, newColumn, searchedItem);
-                }
-                else
-                {
-                    return;
-                }
+                return;
             }
-            catch (IndexOutOfRangeException)
+
+            if (matrix[newRow, newColumn] == searchedItem)
+            {
+                matrix[newRow, newColumn] = 0;
+                CheckUp(matrix, newRow, newColumn, searchedItem);
+            }
+            else
             {
                 return;
             }
@@ -76,23 +77,23 @@
         {
             int newRow = row - 1;
             int newColumn = column;
-            try
-            {
-                if (matrix[newRow, newColumn] == searchedItem)
-                {
-                    matrix[newRow, newColumn] = 0;
-                    CheckDown(matrix, newRow, newColumn, searchedItem);
-                }
-                else
-                {
-                    return;
-                }
-            }
-            catch (IndexOutOfRangeException)
+
+            //If index is out of the matrix stops recursion
+            if (newColumn >= Game.MATRIX_COLS || newRow >= Game.MATRIX_ROWS
+                || newColumn < 0 || newRow < 0)
             {
                 return;
             }
 
+            if (matrix[newRow, newColumn] == searchedItem)
+            {
+                matrix[newRow, newColumn] = 0;
+                CheckDown(matrix, newRow, newColumn, searchedItem);
+            }
+            else
+            {
+                return;
+            }
         }
         public static bool Change(byte[,] matrixToModify, int rowAtm, int columnAtm)
         {
@@ -116,10 +117,9 @@
         {
             bool isWinner = true;
             Stack<byte> stack = new Stack<byte>();
-            int columnLenght = matrix.GetLength(0);
-            for (int j = 0; j < matrix.GetLength(1); j++)
+            for (int j = 0; j < Game.MATRIX_COLS; j++)
             {
-                for (int i = 0; i < columnLenght; i++)
+                for (int i = 0; i < Game.MATRIX_ROWS; i++)
                 {
                     if (matrix[i, j] != 0)
                     {
@@ -127,7 +127,7 @@
                         stack.Push(matrix[i, j]);
                     }
                 }
-                for (int k = columnLenght - 1; (k >= 0); k--)
+                for (int k = Game.MATRIX_ROWS - 1; k >= 0; k--)
                 {
                     try
                     {
@@ -207,31 +207,12 @@
             return skilled;
         }
 
-        public static void Main(string[] args)
-        {
-            string[,] topFive = new string[5, 2];
-            byte[,] matrix = GenerateMatrix(5, 10);
-
-            PrintMatrix(matrix);
-            string temp = null;
-            int userMoves = 0;
-            while (temp != "EXIT")
-            {
-                Console.WriteLine("Enter a row and column: ");
-                temp = Console.ReadLine();
-                temp = temp.ToUpper().Trim();
-
-                ProcessGame(temp, topFive, ref matrix, ref userMoves);
-            }
-            Console.WriteLine("Good Bye! ");
-        }
-
         private static void ProcessGame(string temp, string[,] topFive, ref byte[,] matrix, ref int userMoves)
         {
             switch (temp)
             {
                 case "RESTART":
-                    matrix = GenerateMatrix(5, 10);
+                    matrix = GenerateMatrix(Game.MATRIX_ROWS, Game.MATRIX_COLS);
                     PrintMatrix(matrix);
                     userMoves = 0;
                     break;
@@ -243,17 +224,15 @@
                     {
                         int userRow, userColumn;
                         userRow = int.Parse(temp[0].ToString());
-                        if (userRow > 4)
+                        if (userRow >= Game.MATRIX_ROWS)
                         {
-                            Console.WriteLine("Wrong input ! Try Again ! ");
-                            return;
+                            throw new IndexOutOfRangeException("There are no such field!");
                         }
                         userColumn = int.Parse(temp[2].ToString());
 
                         if (Change(matrix, userRow, userColumn))
                         {
-                            Console.WriteLine("cannot pop missing ballon!");
-                            return;
+                            throw new ArgumentException("This baloon is popped!");
                         }
                         userMoves++;
                         if (IsFinished(matrix))
@@ -267,7 +246,7 @@
                             {
                                 Console.WriteLine("I am sorry you are not skillful enough for TopFive chart!");
                             }
-                            matrix = GenerateMatrix(5, 10);
+                            matrix = GenerateMatrix(Game.MATRIX_ROWS, Game.MATRIX_COLS);
                             userMoves = 0;
                         }
                         PrintMatrix(matrix);
@@ -275,10 +254,39 @@
                     }
                     else
                     {
-                        Console.WriteLine("Wrong input ! Try Again ! ");
-                        break;
+                        throw new IndexOutOfRangeException("There are no such field! Try again!");
                     }
             }
+        }
+
+        public static void Main(string[] args)
+        {
+            string[,] topFive = new string[5, 2];
+            byte[,] matrix = GenerateMatrix(5, 10);
+
+            PrintMatrix(matrix);
+            string temp = null;
+            int userMoves = 0;
+
+            Console.WriteLine("Enter a row and column: ");
+            temp = Console.ReadLine();
+            do
+            {
+                temp = temp.ToUpper().Trim();
+                try
+                {
+                    ProcessGame(temp, topFive, ref matrix, ref userMoves);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                Console.WriteLine("Enter a row and column: ");
+                temp = Console.ReadLine();
+            }
+            while (temp != "EXIT");
+
+            Console.WriteLine("Good Bye! ");
         }
     }
 }
