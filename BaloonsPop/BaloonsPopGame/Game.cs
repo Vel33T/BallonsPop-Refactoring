@@ -1,73 +1,69 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Balloons_Pops_game
+﻿namespace BaloonsPopGame
 {
+    using System;
+    using System.Text;
+
     public class Game
     {
-        public static void printMatrix(byte[,] matrix)
+        public static void PrintMatrix(byte[,] matrix)
         {
-            Console.Write("    ");
+            StringBuilder output = new StringBuilder();
+
+            output.Append("    ");
             for (byte column = 0; column < matrix.GetLongLength(1); column++)
             {
-                Console.Write(column + " ");
+                output.Append(column + " ");
             }
-
-            Console.Write("\n   ");
+            output.Append("\n   ");
             for (byte column = 0; column < matrix.GetLongLength(1) * 2 + 1; column++)
             {
-                Console.Write("-");
-
-
-
+                output.Append("-");
             }
-
-            Console.WriteLine();         // trinket stuff for printMatrix() till here
+            output.Append(Environment.NewLine);
 
             for (byte i = 0; i < matrix.GetLongLength(0); i++)
             {
-                Console.Write(i + " | ");
+                output.Append(i + " | ");
                 for (byte j = 0; j < matrix.GetLongLength(1); j++)
                 {
                     if (matrix[i, j] == 0)
                     {
-                        Console.Write("  ");
-                        continue;
+                        output.Append("  ");
                     }
-
-
-
-                    Console.Write(matrix[i, j] + " ");
+                    else
+                    {
+                        output.Append(matrix[i, j] + " "); 
+                    }
                 }
-                Console.Write("| ");
-                Console.WriteLine();
+                output.Append("| ");
+                output.Append(Environment.NewLine); 
             }
 
-            Console.Write("   ");     //some trinket stuff again
+            output.Append("   ");
             for (byte column = 0; column < matrix.GetLongLength(1) * 2 + 1; column++)
             {
-                Console.Write("-");
+                output.Append("-");
             }
-            Console.WriteLine();
+            output.AppendLine();
+
+            Console.WriteLine(output);
         }
 
 
-        public static byte[,] gen(byte rows, byte columns)
+        public static byte[,] GenerateMatrix(byte rows, byte columns)
         {
-            byte[,] temp = new byte[rows, columns];
+            byte[,] matrix = new byte[rows, columns];
             Random randNumber = new Random();
+
             for (byte row = 0; row < rows; row++)
             {
                 for (byte column = 0; column < columns; column++)
                 {
                     byte tempByte = (byte)randNumber.Next(1, 5);
-                    temp[row, column] = tempByte;
+                    matrix[row, column] = tempByte;
                 }
             }
-            return temp;
+            return matrix;
         }
-
     }
 }
