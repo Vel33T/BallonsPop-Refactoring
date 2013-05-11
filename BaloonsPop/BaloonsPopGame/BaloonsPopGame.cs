@@ -143,9 +143,9 @@
             return skilled;
         }
 
-        private static void ProcessGame(string temp, string[,] topFive, ref byte[,] matrix, ref int userMoves)
+        private static void ProcessGame(string input, string[,] topFive, ref byte[,] matrix, ref int userMoves)
         {
-            switch (temp)
+            switch (input)
             {
                 case "RESTART":
                     matrix = GenerateMatrix(Game.MATRIX_ROWS, Game.MATRIX_COLS);
@@ -156,15 +156,15 @@
                     PrintScoreBoard(topFive);
                     break;
                 default:
-                    if ((temp.Length == 3) && (temp[0] >= '0' && temp[0] <= '9') && (temp[2] >= '0' && temp[2] <= '9') && (temp[1] == ' ' || temp[1] == '.' || temp[1] == ','))
+                    if ((input.Length == 3) && (input[0] >= '0' && input[0] <= '9') && (input[2] >= '0' && input[2] <= '9') && (input[1] == ' ' || input[1] == '.' || input[1] == ','))
                     {
                         int userRow, userColumn;
-                        userRow = int.Parse(temp[0].ToString());
+                        userRow = int.Parse(input[0].ToString());
                         if (userRow >= Game.MATRIX_ROWS)
                         {
                             throw new IndexOutOfRangeException("There is no such field!");
                         }
-                        userColumn = int.Parse(temp[2].ToString());
+                        userColumn = int.Parse(input[2].ToString());
 
                         if (Change(matrix, userRow, userColumn))
                         {
