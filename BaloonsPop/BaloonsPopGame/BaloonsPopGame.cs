@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
 
     public class BaloonsPopGame : Game
     {
@@ -105,9 +106,19 @@
         private static void SavePlayerPoints(string[,] chart, int points, int i)
         {
             Console.WriteLine("Please, insert your name:");
-            string tempUserName = Console.ReadLine();
+            string userName = Console.ReadLine();
             chart[i, 0] = points.ToString();
-            chart[i, 1] = tempUserName;
+            chart[i, 1] = userName;
+            StreamWriter sw = new StreamWriter("topFive.txt");
+            for (int j = 0; j < chart.Length/2; j++)
+            {
+                if (chart[j, 1] == null)
+                {
+                    break;
+                }
+                sw.Write("%"+chart[j, 1] +"-"+ chart[j, 0]);
+            }
+            sw.Close();
         }
 
         public static bool SignIfSkilled(string[,] chart, int points)
@@ -148,10 +159,12 @@
             switch (temp)
             {
                 case "RESTART":
-                    matrix = GenerateMatrix(Game.MATRIX_ROWS, Game.MATRIX_COLS);
-                    PrintMatrix(matrix);
-                    userMoves = 0;
-                    break;
+                    {
+                        matrix = GenerateMatrix(Game.MATRIX_ROWS, Game.MATRIX_COLS);
+                        PrintMatrix(matrix);
+                        userMoves = 0;
+                        break;
+                    }
                 case "TOP":
                     PrintScoreBoard(topFive);
                     break;
@@ -197,9 +210,22 @@
 
         public static void Main(string[] args)
         {
+            //Load top five scores from file
+            string topFiveUsers = File.ReadAllText("topFive.txt");
+            string[] topfiveArray = topFiveUsers.Split('%');
             string[,] topFive = new string[5, 2];
-            byte[,] matrix = GenerateMatrix(5, 10);
-
+            for (int i = 1; i < topfiveArray.Length; i++)
+            {
+                topFive[i-1,0] = topfiveArray[i].Split('-')[1];
+                topFive[i-1, 1] = topfiveArray[i].Split('-')[0];
+                if (i == 5)
+                {
+                    break;
+                }
+                
+            }
+            
+            byte[,] matrix = GenerateMatrix(Game.MATRIX_ROWS, Game.MATRIX_COLS);
             PrintMatrix(matrix);
             string temp = null;
             int userMoves = 0;
