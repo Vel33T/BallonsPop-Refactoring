@@ -18,7 +18,7 @@
             if (matrix[row, column] == searchedItem)
             {
                 matrix[row, column] = 0;
-                CheckField(matrix, row, column, searchedItem);
+                CheckNeighboringFields(matrix, row, column, searchedItem);
             }
             else
             {

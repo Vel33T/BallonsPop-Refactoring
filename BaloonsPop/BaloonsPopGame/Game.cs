@@ -63,7 +63,7 @@
             {
                 for (byte column = 0; column < columns; column++)
                 {
-                    byte tempByte = (byte)randNumber.Next(1, 2);
+                    byte tempByte = (byte)randNumber.Next(1, 5);
                     matrix[row, column] = tempByte;
                 }
             }
