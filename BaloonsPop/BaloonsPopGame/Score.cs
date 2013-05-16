@@ -20,16 +20,17 @@ namespace BaloonsPopGame
             string userName = Console.ReadLine();
             chart[i, 0] = points.ToString();
             chart[i, 1] = userName;
-            StreamWriter sw = new StreamWriter("../../results/topFive" + difficulty + ".txt");
-            for (int j = 0; j < chart.Length / 2; j++)
+            using (StreamWriter sw = new StreamWriter("../../results/topFive" + difficulty + ".txt"))
             {
-                if (chart[j, 1] == null)
+                for (int j = 0; j < chart.Length / 2; j++)
                 {
-                    break;
+                    if (chart[j, 1] == null)
+                    {
+                        break;
+                    }
+                    sw.Write("%" + chart[j, 1] + "-" + chart[j, 0]);
                 }
-                sw.Write("%" + chart[j, 1] + "-" + chart[j, 0]);
             }
-            sw.Close();
         }
 
         public static bool SignIfSkilled(string[,] chart, int points, string difficulty)
@@ -37,11 +38,11 @@ namespace BaloonsPopGame
             bool skilled = false;
             int worstMoves = 0;
             int worstMovesChartPosition = 0;
-            for (int i = 0; i < 5; i++)
+            for (int position = 1; position <= 5; position++)
             {
-                if (chart[i, 0] == null)
+                if (chart[position, 0] == null)
                 {
-                    SavePlayerPoints(chart, points, i, difficulty);
+                    SavePlayerPoints(chart, points, position, difficulty);
                     skilled = true;
                     break;
                 }

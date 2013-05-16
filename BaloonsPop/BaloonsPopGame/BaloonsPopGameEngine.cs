@@ -34,7 +34,8 @@ namespace BaloonsPopGame
                 this.MatrixCols = 9;
             }
             //Load top five scores from file
-            string topFiveUsers = File.ReadAllText("../../results/topFive" + difficulty + ".txt");
+            string path = "../../results/topFive" + difficulty + ".txt";
+            string topFiveUsers = File.ReadAllText(path);
             string[] topfiveArray = topFiveUsers.Split('%');
             this.TopFive = new string[5, 2];
             for (int i = 1; i < topfiveArray.Length; i++)
@@ -248,7 +249,7 @@ namespace BaloonsPopGame
                             }
                             else
                             {
-                                Console.WriteLine("I'm sorry, you are not skillful enough for TopFive chart!");
+                                Console.WriteLine("I'm sorry, you are not skillful enough for Top Five chart!");
                             }
                             this.Matrix = GenerateMatrix();
                             this.UserMoves = 0;
