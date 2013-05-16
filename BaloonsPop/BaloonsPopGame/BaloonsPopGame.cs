@@ -6,27 +6,28 @@
     {
         private static string ChooseDifficulty()
         {
-            Console.WriteLine("What difficulty you want? - Easy, Medium, Hard");
-            string difficulty = Console.ReadLine();
-            if (difficulty == "Easy" || difficulty == "easy")
+            while (true)
             {
-                return "Easy";
+                Console.WriteLine("What difficulty you want? - Easy, Medium, Hard");
+                string difficulty = Console.ReadLine();
+                if (difficulty == "Easy" || difficulty == "easy" || difficulty == "EASY")
+                {
+                    return "Easy";
+                }
+                else if (difficulty == "Medium" || difficulty == "medium" || difficulty == "MEDIUM")
+                {
+                    return "Medium";
+                }
+                else if (difficulty == "Hard" || difficulty == "hard" || difficulty == "HARD")
+                {
+                    return "Hard";
+                }
+                else
+                {
+                    Console.WriteLine("There is no such difficulty!");
+                }
             }
-            else if (difficulty == "Medium" || difficulty == "medium")
-            {
-                return "Medium";
-            }
-            else if (difficulty == "Hard" || difficulty == "hard")
-            {
-                return "Hard";
-            }
-            else
-            {
-                Console.WriteLine("There is no such difficulty!");
-                ChooseDifficulty();
-            }
-
-            return null;
+            
         }
 
         public static void Main(string[] args)

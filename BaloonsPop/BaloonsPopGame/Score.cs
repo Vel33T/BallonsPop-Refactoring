@@ -20,7 +20,7 @@ namespace BaloonsPopGame
             string userName = Console.ReadLine();
             chart[i, 0] = points.ToString();
             chart[i, 1] = userName;
-            StreamWriter sw = new StreamWriter("topFive"+difficulty+".txt");
+            StreamWriter sw = new StreamWriter("../../results/topFive" + difficulty + ".txt");
             for (int j = 0; j < chart.Length / 2; j++)
             {
                 if (chart[j, 1] == null)
