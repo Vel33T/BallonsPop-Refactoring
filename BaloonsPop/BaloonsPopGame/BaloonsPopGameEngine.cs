@@ -48,11 +48,11 @@ namespace BaloonsPopGame
 
             }
             this.Matrix = GenerateMatrix();
-            PrintMatrix();
+            Console.WriteLine(GetMatrixImage());
             this.UserMoves = 0;
         }
 
-        private void PrintMatrix()
+        private string GetMatrixImage()
         {
             StringBuilder output = new StringBuilder();
 
@@ -93,7 +93,7 @@ namespace BaloonsPopGame
             }
             output.AppendLine();
 
-            Console.WriteLine(output);
+            return output.ToString();
         }
 
         private byte[,] GenerateMatrix()
@@ -216,7 +216,7 @@ namespace BaloonsPopGame
                 case "RESTART":
                     {
                         this.Matrix = GenerateMatrix();
-                        PrintMatrix();
+                        GetMatrixImage();
                         this.UserMoves = 0;
                         break;
                     }
@@ -253,7 +253,7 @@ namespace BaloonsPopGame
                             this.Matrix = GenerateMatrix();
                             this.UserMoves = 0;
                         }
-                        PrintMatrix();
+                        GetMatrixImage();
                         break;
                     }
                     else
