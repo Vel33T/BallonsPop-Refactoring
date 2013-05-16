@@ -216,7 +216,7 @@ namespace BaloonsPopGame
                 case "RESTART":
                     {
                         this.Matrix = GenerateMatrix();
-                        GetMatrixImage();
+                        Console.WriteLine(GetMatrixImage());
                         this.UserMoves = 0;
                         break;
                     }
@@ -253,7 +253,7 @@ namespace BaloonsPopGame
                             this.Matrix = GenerateMatrix();
                             this.UserMoves = 0;
                         }
-                        GetMatrixImage();
+                        Console.WriteLine(GetMatrixImage());
                         break;
                     }
                     else
