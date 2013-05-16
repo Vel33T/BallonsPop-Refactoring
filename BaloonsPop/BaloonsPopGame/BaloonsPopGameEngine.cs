@@ -8,15 +8,13 @@ namespace BaloonsPopGame
 {
     public class BaloonsPopGameEngine
     {
-        
-
         private string[,] TopFive { get; set; }
         private byte[,] Matrix { get; set; }
         private int UserMoves { get; set; }
         private byte MatrixRows { get; set; }
         private byte MatrixCols { get; set; }
         private string Difficulty { get; set; }
-        
+
         public BaloonsPopGameEngine(string difficulty)
         {
             this.Difficulty = difficulty;
@@ -36,7 +34,7 @@ namespace BaloonsPopGame
                 this.MatrixCols = 9;
             }
             //Load top five scores from file
-            string topFiveUsers = File.ReadAllText("topFive"+difficulty+".txt");
+            string topFiveUsers = File.ReadAllText("../../results/topFive" + difficulty + ".txt");
             string[] topfiveArray = topFiveUsers.Split('%');
             this.TopFive = new string[5, 2];
             for (int i = 1; i < topfiveArray.Length; i++)
