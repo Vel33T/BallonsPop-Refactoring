@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaloonsPopGame.cs" />
-    <Compile Include="Game.cs" />
+    <Compile Include="BaloonsPopGameEngine.cs" />
     <Compile Include="Score.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
