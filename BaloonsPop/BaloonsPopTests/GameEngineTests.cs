@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using BaloonsPopGame;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -50,6 +51,14 @@ namespace BaloonsPopTests
         }
 
         [TestMethod]
+        public void TestWelcomeScreen()
+        {
+            string actual = BalloonsPopMain.PrintWelcomeMessage();
+            string expected = "********************************";
+            Assert.AreEqual(expected, actual.Substring(0, 32));
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException), "This baloon is popped!")]
         public void TestIsPopped()
         {
@@ -64,6 +73,29 @@ namespace BaloonsPopTests
         {
             engineEasy.Matrix = matrix;
             engineEasy.ProcessGame("3 10");
+        }
+
+        [TestMethod]
+        public void TestGameEnd()
+        {
+            engineEasy.Matrix = matrix;
+            engineEasy.ProcessGame("3 3");
+            engineEasy.ProcessGame("3 3");
+            engineEasy.ProcessGame("3 3");
+
+            using (StringWriter sw = new StringWriter())
+            {
+                Console.SetOut(sw);
+
+                using (StringReader sr = new StringReader(String.Format("Vel{0}", Environment.NewLine)))
+                {
+                    Console.SetIn(sr);
+                    engineEasy.ProcessGame("3 3");
+                    string actual = sw.ToString();
+                    string expected = "Great!";
+                    Assert.AreEqual(expected, actual.Substring(0,6));  
+                }
+            }
         }
     }
 }

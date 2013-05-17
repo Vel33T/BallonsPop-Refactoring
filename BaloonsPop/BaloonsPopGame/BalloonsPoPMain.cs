@@ -11,7 +11,6 @@
 
             string difficulty = Console.ReadLine().ToLower();
             GameEngine game = new GameEngine(difficulty);
-
             Console.WriteLine(game.GetMatrixImage());
 
             Console.WriteLine("Enter a row and column: ");
