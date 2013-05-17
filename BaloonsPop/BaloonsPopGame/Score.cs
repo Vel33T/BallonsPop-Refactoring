@@ -18,7 +18,7 @@ namespace BaloonsPopGame
             {
                 return true;
             }
-            if (this.players[4].Points < moves)
+            if (this.players[4].Points > moves)
             {
                 return true;
             }
