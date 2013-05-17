@@ -22,6 +22,18 @@
             this.userMoves = 0;
         }
 
+        public byte[,] Matrix
+        {
+            get
+            {
+                return this.matrix;
+            }
+            set
+            {
+                this.matrix = value;
+            }
+        }
+
         public string GetMatrixImage()
         {
             StringBuilder output = new StringBuilder();
@@ -36,7 +48,7 @@
             {
                 output.Append("-");
             }
-            output.Append(Environment.NewLine);
+            output.Append("\n");
 
             for (byte i = 0; i < this.matrixRows; i++)
             {
@@ -53,7 +65,7 @@
                     }
                 }
                 output.Append("| ");
-                output.Append(Environment.NewLine);
+                output.Append("\n");
             }
 
             output.Append("   ");
@@ -61,7 +73,7 @@
             {
                 output.Append("-");
             }
-            output.AppendLine();
+            output.Append("\n");
 
             return output.ToString();
         }
