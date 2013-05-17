@@ -9,6 +9,7 @@
             Console.WriteLine("What difficulty you want? - Easy, Medium, Hard");
             string difficulty = Console.ReadLine().ToLower();
             GameEngine game = new GameEngine(difficulty);
+            Console.WriteLine(game.GetMatrixImage());
             Console.WriteLine("Enter a row and column: ");
             string userInput = Console.ReadLine();
             do

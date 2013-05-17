@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-
-namespace BaloonsPopGame
+﻿namespace BaloonsPopGame
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
+
     public class GameEngine
     {
         private string[,] topFive;
@@ -20,13 +19,10 @@ namespace BaloonsPopGame
             this.difficulty = difficulty;
             this.topFive = new string[5, 2];
             this.matrix = GenerateMatrix();
-            Console.WriteLine(GetMatrixImage());
             this.userMoves = 0;
         }
-
         
-
-        private string GetMatrixImage()
+        public string GetMatrixImage()
         {
             StringBuilder output = new StringBuilder();
 
@@ -130,7 +126,7 @@ namespace BaloonsPopGame
             CheckField(row - 1, column, searchedItem);
         }
 
-        private bool isPopped(int rowAtm, int columnAtm)
+        private bool IsPopped(int rowAtm, int columnAtm)
         {
             if (this.matrix[rowAtm, columnAtm] == 0)
             {
@@ -220,7 +216,7 @@ namespace BaloonsPopGame
                     }
 
                     int userColumn = int.Parse(input[2].ToString());
-                    if (!(isPopped(userRow, userColumn)))
+                    if (!(IsPopped(userRow, userColumn)))
                     {
                         byte searchedTarget = this.matrix[userRow, userColumn];
                         this.matrix[userRow, userColumn] = 0;

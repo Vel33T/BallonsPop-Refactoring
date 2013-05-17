@@ -1,7 +1,6 @@
 namespace BaloonsPopGame
 {
     using System;
-    using System.IO;
 
     public class Score : IComparable<Score>
     {
@@ -14,26 +13,6 @@ namespace BaloonsPopGame
             this.Points = points;
             this.Name = name;
         }
-
-        //private static void SavePlayerPoints(string[,] chart, int points, int i, string difficulty)
-        //{
-        //    Console.WriteLine("Please, insert your name:");
-        //    string userName = Console.ReadLine();
-        //    chart[i, 0] = points.ToString();
-        //    chart[i, 1] = userName;
-        //    using (StreamWriter sw = new StreamWriter("../../results/topFive" + difficulty + ".txt"))
-        //    {
-        //        for (int j = 0; j < chart.Length / 2; j++)
-        //        {
-        //            if (chart[j, 1] == null)
-        //            {
-        //                break;
-        //            }
-        //            sw.Write("%" + chart[j, 1] + "-" + chart[j, 0]);
-        //        }
-        //    }
-        //}
-
 
         private static void SavePlayerPoints(string[,] chart, int points, int i, string difficulty)
         {
