@@ -38,6 +38,11 @@ namespace BaloonsPopGame
             }
         }
 
+        public int Count()
+        {
+            return this.players.Count;
+        }
+
         public void Sort()
         {
             players.Sort((x, y) => x.Points.CompareTo(y.Points));
