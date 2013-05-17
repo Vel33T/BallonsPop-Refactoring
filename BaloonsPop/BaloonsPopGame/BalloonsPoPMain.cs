@@ -5,15 +5,18 @@
 
     public class BalloonsPopMain
     {
-        public static void Main(string[] args)
+        public void Main(string[] args)
         {
             Console.WriteLine(PrintWelcomeMessage());
+
             string difficulty = Console.ReadLine().ToLower();
             GameEngine game = new GameEngine(difficulty);
+
             Console.WriteLine(game.GetMatrixImage());
+
             Console.WriteLine("Enter a row and column: ");
             string userInput = Console.ReadLine();
-            while (true) ;
+            while (true)
             {
                 userInput = userInput.ToUpper().Trim();
                 if (userInput == "EXIT")
@@ -34,7 +37,7 @@
             }
         }
 
-        public static string PrintWelcomeMessage()
+        public string PrintWelcomeMessage()
         {
             StringBuilder welcomeMessage = new StringBuilder();
 
@@ -50,6 +53,5 @@
 
              return welcomeMessage.ToString();
         }
-
     }
 }
