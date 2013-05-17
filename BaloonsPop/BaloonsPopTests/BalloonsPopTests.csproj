@@ -6,8 +6,8 @@
     <ProjectGuid>{C6766D3F-FD4F-4F9F-92A4-06EB9E927395}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BaloonsPopTests</RootNamespace>
-    <AssemblyName>BaloonsPopTests</AssemblyName>
+    <RootNamespace>BalloonsPopTests</RootNamespace>
+    <AssemblyName>BalloonsPopTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -50,15 +50,15 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="GameEngineTests.cs" />
     <Compile Include="PlayerTests.cs" />
-    <Compile Include="ScoreTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="GameEngineTests.cs" />
+    <Compile Include="ScoreTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BaloonsPopGame\BaloonsPopGame.csproj">
+    <ProjectReference Include="..\BaloonsPopGame\BalloonsPopGame.csproj">
       <Project>{2e003c33-fd28-444e-b117-89bfa29591f7}</Project>
-      <Name>BaloonsPopGame</Name>
+      <Name>BalloonsPopGame</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

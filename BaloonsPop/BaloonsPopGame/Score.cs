@@ -2,6 +2,7 @@ namespace BaloonsPopGame
 {
     using System;
     using System.Collections.Generic;
+    using System.Text;
 
     public class Score
     {
@@ -38,19 +39,27 @@ namespace BaloonsPopGame
             }
         }
 
+        public int Count()
+        {
+            return this.players.Count;
+        }
+
         public void Sort()
         {
             players.Sort((x, y) => x.Points.CompareTo(y.Points));
         }
 
-        public void PrintScoreBoard()
+        public string GetScoreBoard()
         {
-            Console.WriteLine("---------TOP FIVE SCORES-----------");
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append("---------TOP FIVE SCORES-----------\n");
             for (int i = 0; i < players.Count; ++i)
             {
-                Console.WriteLine("{0}.{1} - {2}", i + 1, players[i].Name, players[i].Points);
+                sb.AppendFormat("{0}.{1} - {2}\n", i + 1, players[i].Name, players[i].Points);
             }
-            Console.WriteLine("-----------------------------------");
+            sb.Append("-----------------------------------");
+            return sb.ToString();
         }
     }
 }

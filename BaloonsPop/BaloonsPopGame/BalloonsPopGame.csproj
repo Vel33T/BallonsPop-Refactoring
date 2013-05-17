@@ -7,8 +7,8 @@
     <ProjectGuid>{2E003C33-FD28-444E-B117-89BFA29591F7}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BaloonsPopGame</RootNamespace>
-    <AssemblyName>BaloonsPopGame</AssemblyName>
+    <RootNamespace>BalloonsPopGame</RootNamespace>
+    <AssemblyName>BalloonsPopGame</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BalloonsPopMain.cs" />
+    <Compile Include="BalloonsPoPMain.cs" />
     <Compile Include="GameEngine.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Score.cs" />

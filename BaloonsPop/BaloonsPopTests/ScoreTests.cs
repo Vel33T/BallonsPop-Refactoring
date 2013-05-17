@@ -101,5 +101,16 @@ namespace BaloonsPopTests
 
             Assert.AreEqual("Gosho", scoresList.players[0].Name);
         }
+
+        [TestMethod]
+        public void TestGetScoreBoard()
+        {
+            Score scoresList = new Score();
+            scoresList.AddPlayer("Pesho", 14);
+            string actual = scoresList.GetScoreBoard();
+            string expected = "---------TOP FIVE SCORES-----------\n1.Pesho - 14\n-----------------------------------";
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

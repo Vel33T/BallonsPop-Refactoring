@@ -60,7 +60,7 @@ namespace BaloonsPopTests
 
         [TestMethod]
         [ExpectedException(typeof(IndexOutOfRangeException), "There is no such field! Try again!")]
-        public void TestGameEnding()
+        public void TestInvalidField()
         {
             engineEasy.Matrix = matrix;
             engineEasy.ProcessGame("3 10");

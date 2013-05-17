@@ -8,7 +8,7 @@
     public class GameEngine
     {
         private Score scoreBoard;
-        private byte[,] matrix;
+        public byte[,] Matrix { get; set; }
         private int userMoves;
         private byte matrixRows;
         private byte matrixCols;
@@ -18,20 +18,8 @@
         {
             this.scoreBoard = new Score();
             this.difficulty = difficulty;
-            this.matrix = GenerateMatrix();
+            this.Matrix = GenerateMatrix();
             this.userMoves = 0;
-        }
-
-        public byte[,] Matrix
-        {
-            get
-            {
-                return this.matrix;
-            }
-            set
-            {
-                this.matrix = value;
-            }
         }
 
         public string GetMatrixImage()
@@ -55,13 +43,13 @@
                 output.Append(i + " | ");
                 for (byte j = 0; j < this.matrixCols; j++)
                 {
-                    if (this.matrix[i, j] == 0)
+                    if (this.Matrix[i, j] == 0)
                     {
                         output.Append("  ");
                     }
                     else
                     {
-                        output.Append(this.matrix[i, j] + " ");
+                        output.Append(this.Matrix[i, j] + " ");
                     }
                 }
                 output.Append("| ");
@@ -119,9 +107,9 @@
                 return;
             }
 
-            if (this.matrix[row, column] == searchedItem)
+            if (this.Matrix[row, column] == searchedItem)
             {
-                this.matrix[row, column] = 0;
+                this.Matrix[row, column] = 0;
                 CheckNeighboringFields(row, column, searchedItem);
             }
             else
@@ -140,7 +128,7 @@
 
         private bool IsPopped(int rowAtm, int columnAtm)
         {
-            if (this.matrix[rowAtm, columnAtm] == 0)
+            if (this.Matrix[rowAtm, columnAtm] == 0)
             {
                 throw new ArgumentException("This baloon is popped!");
             }
@@ -157,13 +145,26 @@
             {
                 for (int i = 0; i < this.matrixRows; i++)
                 {
-                    if (this.matrix[i, j] != 0)
+                    if (this.Matrix[i, j] != 0)
                     {
                         isWinner = false;
                     }
                 }
             }
             return isWinner;
+        }
+
+        private bool IsInputValid(string input)
+        {
+            if ((input.Length == 3) && (input[0] >= '0' && input[0] <= '9') && (input[2] >= '0' && input[2] <= '9') &&
+                (input[1] == ' ' || input[1] == '.' || input[1] == ','))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private void DropDownMatrix()
@@ -173,20 +174,20 @@
             {
                 for (int i = 0; i < this.matrixRows; i++)
                 {
-                    if (this.matrix[i, j] != 0)
+                    if (this.Matrix[i, j] != 0)
                     {
-                        stack.Push(this.matrix[i, j]);
+                        stack.Push(this.Matrix[i, j]);
                     }
                 }
                 for (int k = this.matrixRows - 1; k >= 0; k--)
                 {
                     if (stack.Count != 0)
                     {
-                        this.matrix[k, j] = stack.Pop();
+                        this.Matrix[k, j] = stack.Pop();
                     }
                     else 
                     {
-                        this.matrix[k, j] = 0;
+                        this.Matrix[k, j] = 0;
                     }
                 }
             }
@@ -196,17 +197,17 @@
         {
             if (input == "RESTART")
             {
-                this.matrix = GenerateMatrix();
+                this.Matrix = GenerateMatrix();
                 Console.WriteLine(GetMatrixImage());
                 this.userMoves = 0;
             }
             else if (input == "TOP")
             {
-                scoreBoard.PrintScoreBoard();
+                Console.WriteLine(scoreBoard.GetScoreBoard());
             }
             else
             {
-                if (isInputValid(input))
+                if (IsInputValid(input))
                 {
                     int userRow = int.Parse(input[0].ToString());
                     if (userRow >= matrixRows)
@@ -217,8 +218,8 @@
                     int userColumn = int.Parse(input[2].ToString());
                     if (!(IsPopped(userRow, userColumn)))
                     {
-                        byte searchedTarget = this.matrix[userRow, userColumn];
-                        this.matrix[userRow, userColumn] = 0;
+                        byte searchedTarget = this.Matrix[userRow, userColumn];
+                        this.Matrix[userRow, userColumn] = 0;
                         CheckNeighboringFields(userRow, userColumn, searchedTarget);
                         DropDownMatrix();
                     }
@@ -234,14 +235,14 @@
                             string playerName = Console.ReadLine();
                             scoreBoard.AddPlayer(playerName, this.userMoves);
                             scoreBoard.Sort();
-                            scoreBoard.PrintScoreBoard();
+                            Console.WriteLine(scoreBoard.GetScoreBoard());
                         }
                         else
                         {
                             Console.WriteLine("I'm sorry, you are not skillful enough for Top Five chart!");
                         }
 
-                        this.matrix = GenerateMatrix();
+                        this.Matrix = GenerateMatrix();
                         this.userMoves = 0;
                     }
                     Console.WriteLine(GetMatrixImage());
@@ -250,19 +251,6 @@
                 {
                     throw new IndexOutOfRangeException("There is no such field! Try again!");
                 }
-            }
-        }
-
-        private bool isInputValid(string input)
-        {
-            if ((input.Length == 3) && (input[0] >= '0' && input[0] <= '9') && (input[2] >= '0' && input[2] <= '9') &&
-                (input[1] == ' ' || input[1] == '.' || input[1] == ','))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
             }
         }
     }
