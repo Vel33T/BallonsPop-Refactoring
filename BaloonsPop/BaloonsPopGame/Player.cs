@@ -39,5 +39,21 @@ namespace BaloonsPopGame
                 this.points = value;
             }
         }
+
+        //public int CompareTo(Player other)
+        //{
+        //    if (this.points > other.points)
+        //    {
+        //        return 1;
+        //    }
+        //    else if (this.points < other.points)
+        //    {
+        //        return -1;
+        //    }
+        //    else
+        //    {
+        //        return 0;
+        //    }
+        //}
     }
 }
