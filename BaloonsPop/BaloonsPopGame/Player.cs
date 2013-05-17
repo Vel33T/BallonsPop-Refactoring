@@ -10,7 +10,7 @@ namespace BaloonsPopGame
     {
         private string name;
         private int points;
-        public Player (string name, int points)
+        public Player(string name, int points)
         {
             this.Name = name;
             this.Points = points;
@@ -24,7 +24,7 @@ namespace BaloonsPopGame
             }
             set
             {
-                this.name=value;
+                this.name = value;
             }
         }
 
@@ -36,7 +36,7 @@ namespace BaloonsPopGame
             }
             set
             {
-                this.points=value;
+                this.points = value;
             }
         }
     }

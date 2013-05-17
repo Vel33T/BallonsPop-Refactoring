@@ -18,10 +18,11 @@
         {
             this.scoreBoard = new Score();
             this.difficulty = difficulty;
+            this.topFive = new string[5, 2];
             this.matrix = GenerateMatrix();
             this.userMoves = 0;
         }
-
+        
         public string GetMatrixImage()
         {
             StringBuilder output = new StringBuilder();
@@ -141,31 +142,34 @@
         private bool IsFinished()
         {
             bool isWinner = true;
+            for (int row = 0; row < this.matrixCols; row++)
+            Stack<byte> stack = new Stack<byte>();
             for (int j = 0; j < this.matrixCols; j++)
             {
-                for (int i = 0; i < this.matrixRows; i++)
+                for (int col = 0; col < this.matrixRows; col++)
                 {
-                    if (this.matrix[i, j] != 0)
+                    if (this.matrix[col, row] != 0)
                     {
                         isWinner = false;
+                        stack.Push(this.matrix[i, j]);
                     }
                 }
             }
             return isWinner;
         }
 
-        private void DropDownMatrix()
+        public void PrintScoreBoard()
         {
-            Stack<byte> stack = new Stack<byte>();
-            for (int j = 0; j < this.matrixCols; j++)
+            List<Score> scores = new List<Score>();
+
+            for (int i = 0; i < 5; ++i)
             {
-                for (int i = 0; i < this.matrixRows; i++)
+                if (this.topFive[i, 0] == null)
                 {
-                    if (this.matrix[i, j] != 0)
-                    {
-                        stack.Push(this.matrix[i, j]);
-                    }
+                    break;
                 }
+
+                scores.Add(new Score(int.Parse(this.topFive[i, 0]), this.topFive[i, 1]));
                 for (int k = this.matrixRows - 1; k >= 0; k--)
                 {
                     try
@@ -178,9 +182,21 @@
                     }
                 }
             }
+
+            scores.Sort();
+
+            Console.WriteLine("---------TOP FIVE SCORES-----------");
+            for (int i = 0; i < scores.Count; ++i)
+            {
+                Console.WriteLine("{0}.   {1}", i + 1, scores[i]);
+            }
+            Console.WriteLine("-----------------------------------");
+            return isWinner;
         }
 
 
+        }
+        
         public void ProcessGame(string input)
         {
             if (input == "RESTART")
@@ -209,7 +225,6 @@
                         byte searchedTarget = this.matrix[userRow, userColumn];
                         this.matrix[userRow, userColumn] = 0;
                         CheckNeighboringFields(userRow, userColumn, searchedTarget);
-                        DropDownMatrix();
                     }
 
                     this.userMoves++;
