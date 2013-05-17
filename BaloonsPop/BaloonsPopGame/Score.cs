@@ -18,7 +18,7 @@ namespace BaloonsPopGame
             {
                 return true;
             }
-            if (this.players[4].Points < moves)
+            if (this.players[4].Points > moves)
             {
                 return true;
             }
@@ -51,8 +51,6 @@ namespace BaloonsPopGame
                 Console.WriteLine("{0}.{1} - {2}", i + 1, players[i].Name, players[i].Points);
             }
             Console.WriteLine("-----------------------------------");
-
-
         }
     }
 }
