@@ -8,7 +8,6 @@ namespace BaloonsPopGame
 {
     public class GameEngine
     {
-        private string[,] topFive;
         private byte[,] matrix;
         private int userMoves;
         private byte matrixRows;
@@ -171,31 +170,7 @@ namespace BaloonsPopGame
             return isWinner;
         }
 
-        public void PrintScoreBoard()
-        {
-            List<Score> scores = new List<Score>();
-
-            for (int i = 0; i < 5; ++i)
-            {
-                if (this.topFive[i, 0] == null)
-                {
-                    break;
-                }
-
-                scores.Add(new Score(int.Parse(this.topFive[i, 0]), this.topFive[i, 1]));
-            }
-
-            scores.Sort();
-
-            Console.WriteLine("---------TOP FIVE SCORES-----------");
-            for (int i = 0; i < scores.Count; ++i)
-            {
-                Console.WriteLine("{0}.   {1}", i + 1, scores[i]);
-            }
-            Console.WriteLine("-----------------------------------");
-
-
-        }
+       
 
         public void ProcessGame(string input)
         {
@@ -207,7 +182,7 @@ namespace BaloonsPopGame
             }
             else if (input == "TOP")
             {
-                PrintScoreBoard();
+                Score.PrintScoreBoard();
             }
             else
             {
@@ -232,9 +207,9 @@ namespace BaloonsPopGame
                     if (IsFinished())
                     {
                         Console.WriteLine("Great! You completed it in {0} moves.", this.userMoves);
-                        if (Score.SignIfSkilled(this.topFive, this.userMoves, this.difficulty))
+                        if (Score.SignIfSkilled(this.userMoves))
                         {
-                            PrintScoreBoard();
+                            Score.PrintScoreBoard();
                         }
                         else
                         {
