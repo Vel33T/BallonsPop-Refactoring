@@ -18,6 +18,7 @@
         {
             this.scoreBoard = new Score();
             this.difficulty = difficulty;
+            this.topFive = new string[5, 2];
             this.matrix = GenerateMatrix();
             this.userMoves = 0;
         }
@@ -141,11 +142,16 @@
         private bool IsFinished()
         {
             bool isWinner = true;
+<<<<<<< HEAD
+=======
+            for (int row = 0; row < this.matrixCols; row++)
+            Stack<byte> stack = new Stack<byte>();
+>>>>>>> 0151b73fd3bab7e81ed2ac0ad0fe51357289916a
             for (int j = 0; j < this.matrixCols; j++)
             {
-                for (int i = 0; i < this.matrixRows; i++)
+                for (int col = 0; col < this.matrixRows; col++)
                 {
-                    if (this.matrix[i, j] != 0)
+                    if (this.matrix[col, row] != 0)
                     {
                         isWinner = false;
                     }
@@ -166,6 +172,22 @@
                         stack.Push(this.matrix[i, j]);
                     }
                 }
+            }
+            return isWinner;
+        }
+
+        public void PrintScoreBoard()
+        {
+            List<Score> scores = new List<Score>();
+
+            for (int i = 0; i < 5; ++i)
+            {
+                if (this.topFive[i, 0] == null)
+                {
+                    break;
+                }
+
+                scores.Add(new Score(int.Parse(this.topFive[i, 0]), this.topFive[i, 1]));
                 for (int k = this.matrixRows - 1; k >= 0; k--)
                 {
                     try
@@ -178,8 +200,23 @@
                     }
                 }
             }
+<<<<<<< HEAD
         }
 
+=======
+
+            scores.Sort();
+
+            Console.WriteLine("---------TOP FIVE SCORES-----------");
+            for (int i = 0; i < scores.Count; ++i)
+            {
+                Console.WriteLine("{0}.   {1}", i + 1, scores[i]);
+            }
+            Console.WriteLine("-----------------------------------");
+
+
+        }
+>>>>>>> 0151b73fd3bab7e81ed2ac0ad0fe51357289916a
         
         public void ProcessGame(string input)
         {
