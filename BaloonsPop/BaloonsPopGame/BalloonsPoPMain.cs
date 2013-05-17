@@ -5,7 +5,11 @@
 
     public class BalloonsPopMain
     {
-        public static void Main(string[] args)
+        /// <summary>
+        /// The Main method which starts the game, prints initial information
+        /// and gives the possibility to choose level of difficulty.
+        /// </summary>
+        public static void Main()
         {
             Console.WriteLine(PrintWelcomeMessage());
 
@@ -36,6 +40,10 @@
             }
         }
 
+        /// <summary>
+        /// Prepares welcome message with stringbulider. Describes main commands.
+        /// </summary>
+        /// <returns>string with message</returns>
         public static string PrintWelcomeMessage()
         {
             StringBuilder welcomeMessage = new StringBuilder();

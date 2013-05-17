@@ -50,7 +50,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Documentation\Team Lawrencium Presentation.pptx" />
-    <None Include="Documentation\Team Lawrencium Projec tDocumentation.docx" />
+    <None Include="Documentation\Team Lawrencium Project Documentation.docx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
