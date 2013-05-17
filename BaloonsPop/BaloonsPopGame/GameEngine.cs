@@ -168,18 +168,17 @@
                 }
                 for (int k = this.matrixRows - 1; k >= 0; k--)
                 {
-                    try
+                    if (stack.Count != 0)
                     {
                         this.matrix[k, j] = stack.Pop();
                     }
-                    catch (Exception)
+                    else 
                     {
                         this.matrix[k, j] = 0;
                     }
                 }
             }
         }
-
 
         public void ProcessGame(string input)
         {
