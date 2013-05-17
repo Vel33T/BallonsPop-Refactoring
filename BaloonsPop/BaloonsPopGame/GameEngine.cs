@@ -7,13 +7,18 @@
 
     public class GameEngine
     {
-        private Score scoreBoard;
-        public byte[,] Matrix { get; set; }
+        private readonly Score scoreBoard;
+        private readonly string difficulty;
         private int userMoves;
         private byte matrixRows;
         private byte matrixCols;
-        private string difficulty;
 
+        public byte[,] Matrix { get; set; }
+
+        /// <summary>
+        /// Constructor of the class game engine, initialize key components 
+        /// corresponding to the inputed difficulty
+        /// </summary>
         public GameEngine(string difficulty)
         {
             this.scoreBoard = new Score();
@@ -22,6 +27,11 @@
             this.userMoves = 0;
         }
 
+        /// <summary>
+        /// Makes string image of the current state of the matrix which
+        /// is used for printing it on the Console
+        /// </summary>
+        /// <returns>String representation of the matrix</returns>
         public string GetMatrixImage()
         {
             StringBuilder output = new StringBuilder();
@@ -66,6 +76,9 @@
             return output.ToString();
         }
 
+        /// <summary>
+        /// Generates matrix with random values
+        /// </summary>
         private byte[,] GenerateMatrix()
         {
             if (this.difficulty == "easy")
@@ -98,6 +111,12 @@
             return matrix;
         }
 
+        /// <summary>
+        /// Checks if the the <paramref name="searchedItem"/> is equal to the
+        /// item in the matrix at coordinates <paramref name="row"/> <paramref name="column"/>
+        /// If the item in the matrix at those coordinates is the same
+        /// this method calls recursively the method CheckNeighboringFields
+        /// </summary>
         private void CheckField(int row, int column, int searchedItem)
         {
             //If index is out of the matrix stops recursion
@@ -118,6 +137,9 @@
             }
         }
 
+        /// <summary>
+        /// Calls CheckFiled to all possible to pop directions
+        /// </summary>
         private void CheckNeighboringFields(int row, int column, int searchedItem)
         {
             CheckField(row, column + 1, searchedItem);
@@ -126,9 +148,14 @@
             CheckField(row - 1, column, searchedItem);
         }
 
-        private bool IsPopped(int rowAtm, int columnAtm)
+        /// <summary>
+        /// Checks if the item at the position <paramref name="row"/> 
+        /// <paramref name="col"/> is already popped
+        /// </summary>
+        /// <returns>Boolean value</returns>
+        private bool IsPopped(int row, int col)
         {
-            if (this.Matrix[rowAtm, columnAtm] == 0)
+            if (this.Matrix[row, col] == 0)
             {
                 throw new ArgumentException("This baloon is popped!");
             }
@@ -138,6 +165,10 @@
             }
         }
 
+        /// <summary>
+        /// Checks if all the balloons in the matrix are popped
+        /// </summary>
+        /// <returns>Boolean value representing if you are winning</returns>
         private bool IsFinished()
         {
             bool isWinner = true;
@@ -154,6 +185,11 @@
             return isWinner;
         }
 
+        /// <summary>
+        /// Checks if the input is correct
+        /// </summary>
+        /// <param name="input">Current input</param>
+        /// <returns>Boolean value</returns>
         private bool IsInputValid(string input)
         {
             if ((input.Length == 3) && (input[0] >= '0' && input[0] <= '9') && (input[2] >= '0' && input[2] <= '9') &&
@@ -167,6 +203,9 @@
             }
         }
 
+        /// <summary>
+        /// Drops down all balloons if ballons below them are popped
+        /// </summary>
         private void DropDownMatrix()
         {
             Stack<byte> stack = new Stack<byte>();
@@ -193,6 +232,10 @@
             }
         }
 
+        /// <summary>
+        /// Method for handling all game behaviour
+        /// </summary>
+        /// <param name="input">Current input</param>
         public void ProcessGame(string input)
         {
             if (input == "RESTART")
