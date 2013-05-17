@@ -59,10 +59,9 @@ namespace BaloonsPopGame
         public void PrintScoreBoard()
         {
             Console.WriteLine("---------TOP FIVE SCORES-----------");
-            Console.WriteLine(" Position |  Name      |  Score");
             for (int i = 0; i < players.Count; ++i)
             {
-                Console.WriteLine("{0}.          {1}{2,13}", i + 1, players[i].Name, players[i].Points);
+                Console.WriteLine("{0}.{1} - {2}", i + 1, players[i].Name, players[i].Points);
             }
             Console.WriteLine("-----------------------------------");
 
