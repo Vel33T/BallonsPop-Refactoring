@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="BalloonsPopMain.cs" />
     <Compile Include="GameEngine.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Score.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
