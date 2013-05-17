@@ -38,7 +38,6 @@ namespace BaloonsPopGame
             }
         }
 
-        //Bezmislen komentar
         public int Count()
         {
             return this.players.Count;

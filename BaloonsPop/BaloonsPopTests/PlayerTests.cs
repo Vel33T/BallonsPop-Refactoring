@@ -5,7 +5,7 @@ using BaloonsPopGame;
 namespace BaloonsPopTests
 {
     [TestClass]
-    public class PlayerTest
+    public class PlayerTests
     {
         [TestMethod]
         public void PlayerConstructorTest()
@@ -20,6 +20,7 @@ namespace BaloonsPopTests
             Player georgi = new Player("Georgi", 14);
             Assert.AreEqual(14, georgi.Points);
         }
+
         [TestMethod]
         public void PlayerConstructorTest3()
         {
