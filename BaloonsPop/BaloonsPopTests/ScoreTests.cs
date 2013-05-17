@@ -92,8 +92,11 @@ namespace BaloonsPopTests
         {
             Score scoresList = new Score();
             scoresList.AddPlayer("Pesho", 14);
+            scoresList.AddPlayer("Peter", 13);
+            scoresList.AddPlayer("Ivan", 18);
             scoresList.AddPlayer("Gosho", 11);
-
+            scoresList.AddPlayer("Maria", 15);
+            
             scoresList.Sort();
 
             Assert.AreEqual("Gosho", scoresList.players[0].Name);

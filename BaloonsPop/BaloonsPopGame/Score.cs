@@ -51,8 +51,6 @@ namespace BaloonsPopGame
                 Console.WriteLine("{0}.{1} - {2}", i + 1, players[i].Name, players[i].Points);
             }
             Console.WriteLine("-----------------------------------");
-
-
         }
     }
 }
