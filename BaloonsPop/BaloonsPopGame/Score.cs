@@ -61,16 +61,11 @@ namespace BaloonsPopGame
             Console.WriteLine("---------TOP FIVE SCORES-----------");
             for (int i = 0; i < scores.Count; ++i)
             {
-                Console.WriteLine("{0}.   {1}", i + 1, scores[i].Name, scores[i].Points);
+                Console.WriteLine("{0}.   {1}     {2}", i + 1, scores[i].Name, scores[i].Points);
             }
             Console.WriteLine("-----------------------------------");
 
 
-        }
-
-        public override string ToString()
-        {
-            return String.Format("{0} with {1} moves.");
         }
     }
 }

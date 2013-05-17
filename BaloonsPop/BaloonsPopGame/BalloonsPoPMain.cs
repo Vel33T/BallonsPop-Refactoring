@@ -5,7 +5,7 @@
 
     public class BalloonsPopMain
     {
-        public void Main(string[] args)
+        public static void Main(string[] args)
         {
             Console.WriteLine(PrintWelcomeMessage());
 
@@ -37,7 +37,7 @@
             }
         }
 
-        public string PrintWelcomeMessage()
+        public static string PrintWelcomeMessage()
         {
             StringBuilder welcomeMessage = new StringBuilder();
 
