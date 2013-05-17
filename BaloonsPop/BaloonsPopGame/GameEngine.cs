@@ -216,8 +216,12 @@
                     if (IsFinished())
                     {
                         Console.WriteLine("Great! You completed it in {0} moves.", this.userMoves);
-                        if (scoreBoard.SignIfSkilled(this.userMoves))
+                        if (scoreBoard.IsGoodEnough(this.userMoves))
                         {
+                            Console.WriteLine("Enter your name: ");
+                            string playerName = Console.ReadLine();
+                            scoreBoard.AddPlayer(playerName, this.userMoves);
+                            scoreBoard.Sort();
                             scoreBoard.PrintScoreBoard();
                         }
                         else
