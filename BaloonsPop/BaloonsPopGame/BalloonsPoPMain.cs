@@ -13,7 +13,7 @@
             Console.WriteLine(game.GetMatrixImage());
             Console.WriteLine("Enter a row and column: ");
             string userInput = Console.ReadLine();
-            while (true) ;
+            while (true)
             {
                 userInput = userInput.ToUpper().Trim();
                 if (userInput == "EXIT")

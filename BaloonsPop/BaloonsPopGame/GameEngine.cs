@@ -141,7 +141,6 @@
         private bool IsFinished()
         {
             bool isWinner = true;
-            Stack<byte> stack = new Stack<byte>();
             for (int j = 0; j < this.matrixCols; j++)
             {
                 for (int i = 0; i < this.matrixRows; i++)
@@ -149,6 +148,21 @@
                     if (this.matrix[i, j] != 0)
                     {
                         isWinner = false;
+                    }
+                }
+            }
+            return isWinner;
+        }
+
+        private void DropDownMatrix()
+        {
+            Stack<byte> stack = new Stack<byte>();
+            for (int j = 0; j < this.matrixCols; j++)
+            {
+                for (int i = 0; i < this.matrixRows; i++)
+                {
+                    if (this.matrix[i, j] != 0)
+                    {
                         stack.Push(this.matrix[i, j]);
                     }
                 }
@@ -164,9 +178,7 @@
                     }
                 }
             }
-            return isWinner;
         }
-
 
         
         public void ProcessGame(string input)
@@ -197,8 +209,8 @@
                         byte searchedTarget = this.matrix[userRow, userColumn];
                         this.matrix[userRow, userColumn] = 0;
                         CheckNeighboringFields(userRow, userColumn, searchedTarget);
+                        DropDownMatrix();
                     }
-
                     this.userMoves++;
 
                     if (IsFinished())
