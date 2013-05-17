@@ -37,6 +37,7 @@
         public static string PrintWelcomeMessage()
         {
             StringBuilder welcomeMessage = new StringBuilder();
+
              welcomeMessage.AppendLine("********************************");
              welcomeMessage.AppendLine("* Welcome to Balloons Pop Game *");
              welcomeMessage.AppendLine("********************************");
