@@ -5,7 +5,7 @@ using BaloonsPopGame;
 namespace BaloonsPopTests
 {
     [TestClass]
-    public class PlayerTest
+    public class PlayerTests
     {
         [TestMethod]
         public void PlayerConstructorTest()
