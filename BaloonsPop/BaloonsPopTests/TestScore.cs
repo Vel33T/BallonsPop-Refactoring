@@ -7,7 +7,7 @@ namespace BaloonsPopTests
     [TestClass]
     public class TestScore
     {
-        [TestMethod]
+       /* [TestMethod]
         public void Compare14To19Score()
         {
             Score pesho = new Score(14, "Pesho");
@@ -46,6 +46,6 @@ namespace BaloonsPopTests
             Assert.AreEqual("Pesho with 18 moves.", peshoToString);
         }
 
-
+        */
     }
 }

@@ -7,6 +7,7 @@
 
     public class GameEngine
     {
+        private Score scoreBoard;
         private byte[,] matrix;
         private int userMoves;
         private byte matrixRows;
@@ -15,8 +16,8 @@
 
         public GameEngine(string difficulty)
         {
+            this.scoreBoard = new Score();
             this.difficulty = difficulty;
-            this.topFive = new string[5, 2];
             this.matrix = GenerateMatrix();
             this.userMoves = 0;
         }
@@ -166,8 +167,8 @@
             return isWinner;
         }
 
-       
 
+        
         public void ProcessGame(string input)
         {
             if (input == "RESTART")
@@ -178,7 +179,7 @@
             }
             else if (input == "TOP")
             {
-                Score.PrintScoreBoard();
+                scoreBoard.PrintScoreBoard();
             }
             else
             {
@@ -203,9 +204,9 @@
                     if (IsFinished())
                     {
                         Console.WriteLine("Great! You completed it in {0} moves.", this.userMoves);
-                        if (Score.SignIfSkilled(this.userMoves))
+                        if (scoreBoard.SignIfSkilled(this.userMoves))
                         {
-                            Score.PrintScoreBoard();
+                            scoreBoard.PrintScoreBoard();
                         }
                         else
                         {
