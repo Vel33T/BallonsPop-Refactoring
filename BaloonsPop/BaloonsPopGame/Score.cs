@@ -3,9 +3,10 @@ namespace BaloonsPopGame
     using System;
     using System.Collections.Generic;
 
-    public class Score : IComparable<Score>
+    public class Score
     {
         public string[,] topFive;
+        private List<Player> scores = new List<Player>();
 
         public Score()
         {
@@ -18,6 +19,8 @@ namespace BaloonsPopGame
             string userName = Console.ReadLine();
             this.topFive[i, 0] = points.ToString();
             this.topFive[i, 1] = userName;
+            scores.Add(new Player(this.topFive[i, 1], int.Parse(this.topFive[i, 0])));
+            scores.Sort();
         }
 
         public bool SignIfSkilled(int points)
@@ -55,38 +58,19 @@ namespace BaloonsPopGame
 
         public void PrintScoreBoard()
         {
-            List<Score> scores = new List<Score>();
-
-            for (int i = 0; i < 5; ++i)
-            {
-                if (this.topFive[i, 0] == null)
-                {
-                    break;
-                }
-
-                scores.Add(int.Parse(this.topFive[i, 0]), this.topFive[i, 1]));
-            }
-
-            scores.Sort();
-
             Console.WriteLine("---------TOP FIVE SCORES-----------");
             for (int i = 0; i < scores.Count; ++i)
             {
-                Console.WriteLine("{0}.   {1}", i + 1, scores[i]);
+                Console.WriteLine("{0}.   {1}", i + 1, scores[i].Name, scores[i].Points);
             }
             Console.WriteLine("-----------------------------------");
 
 
         }
 
-        public int CompareTo(Score other)
-        {
-            return Points.CompareTo(other.Points);
-        }
-
         public override string ToString()
         {
-            return String.Format("{0} with {1} moves.", this.Name, this.Points);
+            return String.Format("{0} with {1} moves.");
         }
     }
 }

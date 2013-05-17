@@ -7,7 +7,7 @@
 
     public class GameEngine
     {
-        private string[,] topFive;
+        private Score scoreBoard;
         private byte[,] matrix;
         private int userMoves;
         private byte matrixRows;
@@ -16,6 +16,7 @@
 
         public GameEngine(string difficulty)
         {
+            this.scoreBoard = new Score();
             this.difficulty = difficulty;
             this.topFive = new string[5, 2];
             this.matrix = GenerateMatrix();
@@ -142,12 +143,15 @@
         {
             bool isWinner = true;
             for (int row = 0; row < this.matrixCols; row++)
+            Stack<byte> stack = new Stack<byte>();
+            for (int j = 0; j < this.matrixCols; j++)
             {
                 for (int col = 0; col < this.matrixRows; col++)
                 {
                     if (this.matrix[col, row] != 0)
                     {
                         isWinner = false;
+                        stack.Push(this.matrix[i, j]);
                     }
                 }
             }
@@ -166,6 +170,17 @@
                 }
 
                 scores.Add(new Score(int.Parse(this.topFive[i, 0]), this.topFive[i, 1]));
+                for (int k = this.matrixRows - 1; k >= 0; k--)
+                {
+                    try
+                    {
+                        this.matrix[k, j] = stack.Pop();
+                    }
+                    catch (Exception)
+                    {
+                        this.matrix[k, j] = 0;
+                    }
+                }
             }
 
             scores.Sort();
@@ -179,7 +194,7 @@
 
 
         }
-
+        
         public void ProcessGame(string input)
         {
             if (input == "RESTART")
@@ -190,7 +205,7 @@
             }
             else if (input == "TOP")
             {
-                PrintScoreBoard();
+                scoreBoard.PrintScoreBoard();
             }
             else
             {
@@ -215,9 +230,9 @@
                     if (IsFinished())
                     {
                         Console.WriteLine("Great! You completed it in {0} moves.", this.userMoves);
-                        if (Score.SignIfSkilled(this.topFive, this.userMoves, this.difficulty))
+                        if (scoreBoard.SignIfSkilled(this.userMoves))
                         {
-                            PrintScoreBoard();
+                            scoreBoard.PrintScoreBoard();
                         }
                         else
                         {
