@@ -1,19 +1,25 @@
 ﻿namespace BaloonsPopGame
 {
     using System;
+    using System.Text;
 
     public class BalloonsPoPMain
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("What difficulty you want? - Easy, Medium, Hard");
+            Console.WriteLine(PrintWelcomeMessage());
             string difficulty = Console.ReadLine().ToLower();
             GameEngine game = new GameEngine(difficulty);
             Console.WriteLine("Enter a row and column: ");
             string userInput = Console.ReadLine();
-            do
+            while (true) ;
             {
                 userInput = userInput.ToUpper().Trim();
+                if (userInput == "EXIT")
+                {
+                    Console.WriteLine("Game over! Have a nice day!");
+                    return;
+                }
                 try
                 {
                     game.ProcessGame(userInput);
@@ -25,9 +31,23 @@
                 Console.WriteLine("Enter a row and column: ");
                 userInput = Console.ReadLine();
             }
-            while (userInput != "EXIT");
-
-            Console.WriteLine("Good Bye!");
         }
+
+        public static string PrintWelcomeMessage()
+        {
+            StringBuilder welcomeMessage = new StringBuilder();
+             welcomeMessage.AppendLine("********************************");
+             welcomeMessage.AppendLine("* Welcome to Balloons Pop Game *");
+             welcomeMessage.AppendLine("********************************");
+             welcomeMessage.AppendLine("");
+             welcomeMessage.AppendLine("Please, insert \"TOP\" to see Top Five score board.");
+             welcomeMessage.AppendLine("Please, insert \"RESTART\" to exit the game.");
+             welcomeMessage.AppendLine("Please, insert \"EXIT\" to exit the game.");
+             welcomeMessage.AppendLine("");
+             welcomeMessage.AppendLine("Please, insert what difficulty do you want? - Easy, Medium, Hard");
+
+             return welcomeMessage.ToString();
+        }
+
     }
 }
