@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class BalloonsPoPMain
+    public class BalloonsPopMain
     {
         public static void Main(string[] args)
         {
