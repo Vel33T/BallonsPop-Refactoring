@@ -7,6 +7,7 @@ namespace BaloonsPopGame
     {
         public string Name { get; private set; }
         public int Points { get; private set; }
+        private string[,] chart = new string[5, 2];
 
         public Score(int points, string name)
         {
@@ -14,23 +15,32 @@ namespace BaloonsPopGame
             this.Name = name;
         }
 
+        //private static void SavePlayerPoints(string[,] chart, int points, int i, string difficulty)
+        //{
+        //    Console.WriteLine("Please, insert your name:");
+        //    string userName = Console.ReadLine();
+        //    chart[i, 0] = points.ToString();
+        //    chart[i, 1] = userName;
+        //    using (StreamWriter sw = new StreamWriter("../../results/topFive" + difficulty + ".txt"))
+        //    {
+        //        for (int j = 0; j < chart.Length / 2; j++)
+        //        {
+        //            if (chart[j, 1] == null)
+        //            {
+        //                break;
+        //            }
+        //            sw.Write("%" + chart[j, 1] + "-" + chart[j, 0]);
+        //        }
+        //    }
+        //}
+
+
         private static void SavePlayerPoints(string[,] chart, int points, int i, string difficulty)
         {
             Console.WriteLine("Please, insert your name:");
             string userName = Console.ReadLine();
             chart[i, 0] = points.ToString();
             chart[i, 1] = userName;
-            using (StreamWriter sw = new StreamWriter("../../results/topFive" + difficulty + ".txt"))
-            {
-                for (int j = 0; j < chart.Length / 2; j++)
-                {
-                    if (chart[j, 1] == null)
-                    {
-                        break;
-                    }
-                    sw.Write("%" + chart[j, 1] + "-" + chart[j, 0]);
-                }
-            }
         }
 
         public static bool SignIfSkilled(string[,] chart, int points, string difficulty)
