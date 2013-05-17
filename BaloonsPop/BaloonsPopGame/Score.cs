@@ -5,7 +5,7 @@ namespace BaloonsPopGame
 
     public class Score
     {
-        private List<Player> players;
+        public List<Player> players { get; private set; }
 
         public Score()
         {
@@ -36,11 +36,6 @@ namespace BaloonsPopGame
             {
                 this.players.Add(new Player(name, moves));
             }
-        }
-
-        public int Count()
-        {
-            return this.players.Count;
         }
 
         public void Sort()
